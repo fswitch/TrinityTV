@@ -11,7 +11,7 @@ const PARTNERID = XXX;
 
 Оба значения выдаются менеджерами TrinityTV
 
-<?php 
+
 
 set_time_limit(0);
 
@@ -56,5 +56,4 @@ $res = Trinity\TV::MACcode(777,'1234');
 $res = Trinity\TV::UserList();
 
 
-?>
 
