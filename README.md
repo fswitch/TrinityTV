@@ -1,15 +1,15 @@
-#PHP класс для работы с TrinityTV API
+# PHP класс для работы с TrinityTV API
 
 Если есть вопросы - задавайте их на форуме https://local.com.ua
 
-##Пример использования 
+## Пример использования 
 (если непонятны комментарии к самому коду)
 
 Изменить в trinity.class.php константы
-
+```
 const PARTNERID = XXX;
 сonst SALT = 'xxXXxxXXxxXX';
-
+```
 Оба значения выдаются менеджерами TrinityTV
 
 
