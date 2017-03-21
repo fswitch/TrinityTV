@@ -419,6 +419,13 @@ class TV
     }
     
     
+    /*
+     *
+     * Generate Unique number
+     * 
+     * @return int
+     * 
+     */
     private function GenInt()
     {
         list($usec, $sec) = explode(' ', microtime());
