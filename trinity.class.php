@@ -4,8 +4,8 @@ Namespace Trinity;
 
 class TV
 {
-    const PARTNERID = XXX;
-    const SALT = 'xxXXxxXXxxXX';
+    const PARTNERID = 'XXX';
+    const SALT = 'XXXXXXXXXX';
     
     public function __construct() {
         
@@ -83,8 +83,7 @@ class TV
         $hash = md5($int.self::PARTNERID.$localid.$firstname.$lastname.$middlename.$address.self::SALT);
         $uri = 'http://trinity-tv.net/partners/user/updateuser?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&lastname='.$lastname.'&firstname='.$firstname.'&middlename='.$middlename.'&address='.$address.'&hash='.$hash;
         $res = self::_get_uri($uri);
-        echo $uri;
-        echo '<pre>'; print_r($res);
+        
         $js = json_decode($res);
 
         if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success'){
@@ -272,7 +271,7 @@ class TV
         $hash = md5($int.self::PARTNERID.$localid.$mac.self::SALT);
         $uri = 'http://trinity-tv.net/partners/user/deletemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = self::_get_uri($uri);
-        
+
         $js = json_decode($res);
         
         if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success'){

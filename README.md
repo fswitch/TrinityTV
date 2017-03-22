@@ -32,9 +32,7 @@ $res = Trinity\TV::Subscription(777, 'suspend');
 
 // Изменения описания клиента в базе TrinityTV (аргументами передаются: 
 // идентификатор локального абонента, Фамилия, Имя. Отчество, Адрес)
-// На данный момент TrinityTV поддерживает только пустое отчество, т.е. параметр 
-// Second name должен быть пустым
-$res = Trinity\TV::UserUpdate(777,'Surname','First name','Second name','address');
+$res = Trinity\TV::UserUpdate(777,'Surname','First name','Second name','Address');
 
 // Добавление MAC адреса к подписке абонента. Параметрами передаются: 
 // идентификатор локального абонента и MAC адрес устройства
