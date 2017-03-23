@@ -169,7 +169,7 @@ class TV
         $hash = md5($int.self::PARTNERID.$localid.self::SALT);
         $uri = 'http://trinity-tv.net/partners/user/subscriptioninfo?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&hash='.$hash;
         $res = self::_get_uri($uri);
-        
+
         $js = json_decode($res);
         
         if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success'){
@@ -220,7 +220,7 @@ class TV
         $hash = md5($int.self::PARTNERID.$localid.$mac.self::SALT);
         $uri = 'http://trinity-tv.net/partners/user/autorizemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = self::_get_uri($uri);
-        
+
         $js = json_decode($res);
         
         if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success'){
@@ -310,7 +310,7 @@ class TV
         
         if (
             empty($code) || 
-            !preg_match('#^[0-9]{4}$#uis',$mac)
+            !preg_match('#^[0-9]{4}$#uis',$code)
         ){
             return array('error'=>1,'msg'=>'No valid code entered');
         }
