@@ -21,7 +21,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or empty')
      * 
      */
-    public function UserCreate($localid=0, $subscrid=0)
+    public static function UserCreate($localid=0, $subscrid=0)
     {
         // GET /partners/user/create?requestid={requestid}&partnerid={partnerid}&localid={localid}&subscrid={subscrid}&hash={hash}
         // hash = md5(requestid+partnerid+localid+subscrid+salt)
@@ -67,7 +67,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or empty')
      * 
      */
-    public function UserUpdate($localid=0,$lastname='',$firstname='',$middlename='',$address='')
+    public static function UserUpdate($localid=0,$lastname='',$firstname='',$middlename='',$address='')
     {
         // GET /partners/user/updateuser?requestid={requestid}&partnerid={partnerid}&localid={localid}firstname={partnerid}&lastname={lastname}&middlename={middlename}&address={address}&hash={hash}
         // hash = md5(requestid+partnerid+localid+firstname+lastname+middlename+address+salt)
@@ -110,7 +110,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or empty')
      * 
      */
-    public function Subscription($localid=0,$operationid='')
+    public static function Subscription($localid=0,$operationid='')
     {
         // GET /partners/user/subscription?requestid={requestid}&partnerid={partnerid}&localid={localid}&operationid={unsubscribe}&hash={hash}
         // operationid - unsubscribe ­ отключение подписки
@@ -156,7 +156,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or array of subscriptions')
      * 
      */
-    public function SubscriptionInfo($localid=0)
+    public static function SubscriptionInfo($localid=0)
     {
         if ($localid == 0 || empty($localid) || !is_numeric($localid) || (int)($localid)<1){
             return array('error'=>1,'msg'=>'No local user ID entered');
@@ -196,7 +196,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or empty')
      * 
      */
-    public function MACadd($localid=0,$mac='')
+    public static function MACadd($localid=0,$mac='')
     {
         // GET /partners/user/autorizemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
         // hash = md5(requestid+partnerid+localid+mac+salt)
@@ -247,7 +247,7 @@ class TV
      * @return array ('error'=>0/1, 'msg'=>'error message or empty')
      * 
      */
-    public function MACdel($localid=0,$mac='')
+    public static function MACdel($localid=0,$mac='')
     {
         // GET /partners/user/deletemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
         // hash = md5(requestid+partnerid+localid+mac+salt)
@@ -299,7 +299,7 @@ class TV
      * @return array ('error'=>0/1, 'mac'=>'000000000000', 'msg'=>'error message or empty')
      * 
      */
-    public function MACcode($localid=0,$code='')
+    public static function MACcode($localid=0,$code='')
     {
         // GET /partners/user/autorizebycode?requestid={requestid}&partnerid={partnerid}&localid={localid}&code={code}&hash={hash}
         // hash = md5(requestid+partnerid+localid+code+salt)
@@ -348,7 +348,7 @@ class TV
      * @return array ('error'=>0/1, 'macs'=>array('444444444444','555555555555'), 'msg'=>'error message or empty')
      * 
      */
-    public function MAClist($localid=0)
+    public static function MAClist($localid=0)
     {
         // GET /partners/user/listmac?requestid={requestid}&partnerid={partnerid}&localid={localid}&hash={hash}
         // hash = md5(requestid+partnerid+localid+salt)
@@ -388,7 +388,7 @@ class TV
      * @return array ('error'=>0/1, users => array(12 => array('subscrid' => 123, 'subscrprice' => 0, 'subscrstatusid' => 0)), 'msg'=>'error message or empty')
      * 
      */
-    public function UserList()
+    public static function UserList()
     {
         // GET /partners/user/subscriberlist?requestid={requestid}&partnerid={partnerid}&hash={hash}
         // hash = md5(requestid+partnerid+salt)
@@ -425,14 +425,14 @@ class TV
      * @return int
      * 
      */
-    private function GenInt()
+    private static function GenInt()
     {
         list($usec, $sec) = explode(' ', microtime());
         
         return str_replace('.','',((float)$sec.(float)$usec));
     }
     
-    private function _get_uri($uri='')
+    private static function _get_uri($uri='')
     {
         if (empty($uri)){
             return array('error'=>1,'msg'=>'No URI');
