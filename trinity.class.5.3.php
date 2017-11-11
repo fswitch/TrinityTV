@@ -9,7 +9,6 @@ class TrinityTV
         
     }
     
-    
     /*
      * Create user at TrinityTV DB
      * 
