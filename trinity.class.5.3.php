@@ -33,7 +33,7 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$subscrid.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/create?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&subscrid='.$subscrid.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/create?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&subscrid='.$subscrid.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         if (php_sapi_name() == 'cli'){
@@ -87,7 +87,7 @@ class TrinityTV
         $middlename=urlencode($middlename);
         $address=urlencode($address);
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$firstname.$lastname.$middlename.$address.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/updateuser?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&lastname='.$lastname.'&firstname='.$firstname.'&middlename='.$middlename.'&address='.$address.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/updateuser?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&lastname='.$lastname.'&firstname='.$firstname.'&middlename='.$middlename.'&address='.$address.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
 	
 	
@@ -135,7 +135,7 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$operationid.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/subscription?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&operationid='.$operationid.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/subscription?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&operationid='.$operationid.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -175,7 +175,7 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/subscriptioninfo?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/subscriptioninfo?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -227,8 +227,8 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$mac.TrinityTV::SALT);
-        // $uri = TRINITY_HOST.'/partners/user/autorizemac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
-        $uri = TRINITY_HOST.'/partners/user/autorizedevice?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        // $uri = TrinityTV::TRINITY_HOST.'/partners/user/autorizemac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/autorizedevice?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -280,8 +280,8 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$mac.TrinityTV::SALT);
-        // $uri = TRINITY_HOST.'/partners/user/deletemac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
-        $uri = TRINITY_HOST.'/partners/user/deletedevice?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        // $uri = TrinityTV::TRINITY_HOST.'/partners/user/deletemac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/deletedevice?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -329,7 +329,7 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.$code.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/autorizebycode?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&code='.$code.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/autorizebycode?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&code='.$code.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -372,8 +372,8 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.$localid.TrinityTV::SALT);
-        // $uri = TRINITY_HOST.'/partners/user/listmac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&hash='.$hash;
-        $uri = TRINITY_HOST.'/partners/user/devicelist?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&hash='.$hash;
+        // $uri = TrinityTV::TRINITY_HOST.'/partners/user/listmac?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/devicelist?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&localid='.$localid.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);
@@ -382,7 +382,7 @@ class TrinityTV
         {
             $macs = array();
             foreach ((array)$js->devices as $d){
-                if (!empty($d['mac'])) $macs[] = $d['mac'];
+                if (!empty($d->mac)) $macs[] = $d->mac;
             }
             return array(
                 'error' => 0,
@@ -415,7 +415,7 @@ class TrinityTV
         
         $int = TrinityTV::GenInt();
         $hash = md5($int.TrinityTV::PARTNERID.TrinityTV::SALT);
-        $uri = TRINITY_HOST.'/partners/user/subscriberlist?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&hash='.$hash;
+        $uri = TrinityTV::TRINITY_HOST.'/partners/user/subscriberlist?requestid='.$int.'&partnerid='.TrinityTV::PARTNERID.'&hash='.$hash;
         $res = TrinityTV::_get_uri($uri);
         
         $js = json_decode($res);

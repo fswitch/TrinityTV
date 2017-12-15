@@ -376,7 +376,7 @@ class TV
         {
             $macs = array();
             foreach ((array)$js->devices as $d){
-                if (!empty($d['mac'])) $macs[] = $d['mac'];
+                if (!empty($d->mac)) $macs[] = $d->mac;
             }
             return array(
                 'error' => 0,
