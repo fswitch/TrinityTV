@@ -72,6 +72,7 @@ class TV
     {
         // GET /partners/user/updateuser?requestid={requestid}&partnerid={partnerid}&localid={localid}firstname={partnerid}&lastname={lastname}&middlename={middlename}&address={address}&hash={hash}
         // hash = md5(requestid+partnerid+localid+firstname+lastname+middlename+address+salt)
+        
         if ($localid == 0 || empty($localid) || !is_numeric($localid) || (int)($localid)<1){
             return array('error'=>1,'msg'=>'No local user ID entered');
         }
@@ -199,7 +200,8 @@ class TV
      */
     public static function MACadd($localid=0,$mac='')
     {
-        // GET /partners/user/autorizemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
+        // old (till 2017.12.15) GET /partners/user/autorizemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
+        // GET /partners/user/autorizedevice?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&uuid={uuid}&hash={hash}
         // hash = md5(requestid+partnerid+localid+mac+salt)
         
         if ($localid == 0 || empty($localid) || !is_numeric($localid) || (int)($localid)<1){
@@ -219,7 +221,8 @@ class TV
         
         $int = self::GenInt();
         $hash = md5($int.self::PARTNERID.$localid.$mac.self::SALT);
-        $uri = TRINITY_HOST.'/partners/user/autorizemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        // $uri = TRINITY_HOST.'/partners/user/autorizemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        $uri = TRINITY_HOST.'/partners/user/autorizedevice?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = self::_get_uri($uri);
 
         $js = json_decode($res);
@@ -250,7 +253,8 @@ class TV
      */
     public static function MACdel($localid=0,$mac='')
     {
-        // GET /partners/user/deletemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
+        // old (till 2017.12.15) GET /partners/user/deletemac?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&hash={hash}
+        // GET /partners/user/deletedevice?requestid={requestid}&partnerid={partnerid}&localid={localid}&mac={mac}&uuid={uuid}&hash={hash}
         // hash = md5(requestid+partnerid+localid+mac+salt)
         
         if ($localid == 0 || empty($localid) || !is_numeric($localid) || (int)($localid)<1){
@@ -270,7 +274,8 @@ class TV
         
         $int = self::GenInt();
         $hash = md5($int.self::PARTNERID.$localid.$mac.self::SALT);
-        $uri = TRINITY_HOST.'/partners/user/deletemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        // $uri = TRINITY_HOST.'/partners/user/deletemac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
+        $uri = TRINITY_HOST.'/partners/user/deletedevice?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&mac='.$mac.'&hash='.$hash;
         $res = self::_get_uri($uri);
 
         $js = json_decode($res);
@@ -351,7 +356,8 @@ class TV
      */
     public static function MAClist($localid=0)
     {
-        // GET /partners/user/listmac?requestid={requestid}&partnerid={partnerid}&localid={localid}&hash={hash}
+        // old (till 2017.12.15) GET /partners/user/listmac?requestid={requestid}&partnerid={partnerid}&localid={localid}&hash={hash}
+        // GET/partners/user/devicelist?requestid={requestid}&partnerid={partnerid}&localid={localid}&hash={hash}
         // hash = md5(requestid+partnerid+localid+salt)
         
         if ($localid == 0 || empty($localid) || !is_numeric($localid) || (int)($localid)<1){
@@ -360,15 +366,22 @@ class TV
         
         $int = self::GenInt();
         $hash = md5($int.self::PARTNERID.$localid.self::SALT);
-        $uri = TRINITY_HOST.'/partners/user/listmac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&hash='.$hash;
+        // $uri = TRINITY_HOST.'/partners/user/listmac?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&hash='.$hash;
+        $uri = TRINITY_HOST.'/partners/user/devicelist?requestid='.$int.'&partnerid='.Self::PARTNERID.'&localid='.$localid.'&hash='.$hash;
         $res = self::_get_uri($uri);
         
         $js = json_decode($res);
         
-        if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success'){
+        if (isset($js->requestid) && $js->requestid == $int && $js->result == 'success')
+        {
+            $macs = array();
+            foreach ((array)$js->devices as $d){
+                if (!empty($d['mac'])) $macs[] = $d['mac'];
+            }
             return array(
                 'error' => 0,
-                'macs'  => (array)$js->maclist,
+                // 'macs'  => (array)$js->maclist,
+                'macs' => $macs,
                 'msg'   => ''
             );
         }
